@@ -1,6 +1,6 @@
 # What breaks on a server at 03:14:08 on 19 January 2038?
 
-Video: (link coming)
+Video: https://youtu.be/7KyufuBxmx4
 
 Unix time counts seconds since 1 January 1970. Stored in a signed 32-bit integer, it runs out at 2,147,483,647, which is 03:14:07 UTC on 19 January 2038. One second later it wraps to -2,147,483,648, which reads as 13 December 1901.
 
