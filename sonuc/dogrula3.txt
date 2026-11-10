@@ -1,0 +1,30 @@
+== saat: 2038-01-19 03:40:00
+-- CREATE TABLE d.ddl_a1 (id INT);
+ERROR 3507 (HY000) at line 1: Failed to update tables dictionary object.
+-- CREATE DATABASE db_a1;
+ERROR 3507 (HY000) at line 1: Failed to update schemata dictionary object.
+== saat: 2037-12-31 23:00:00
+-- CREATE TABLE d.ddl_b1 (id INT);
+-- CREATE DATABASE db_b1;
+== saat: 2038-01-19 03:41:00
+-- CREATE TABLE d.ddl_a2 (id INT);
+ERROR 3507 (HY000) at line 1: Failed to update tables dictionary object.
+-- CREATE DATABASE db_a2;
+ERROR 3507 (HY000) at line 1: Failed to update schemata dictionary object.
+== saat: 2038-01-19 03:14:07
+-- CREATE TABLE d.ddl_c1 (id INT);
+-- CREATE DATABASE db_c1;
+== saat: 2038-01-19 03:14:09
+-- CREATE TABLE d.ddl_c2 (id INT);
+ERROR 3507 (HY000) at line 1: Failed to update tables dictionary object.
+-- CREATE DATABASE db_c2;
+ERROR 3507 (HY000) at line 1: Failed to update schemata dictionary object.
+== hangi tablolar oluştu
+-- SELECT TABLE_NAME, CREATE_TIME FROM information_schema.tables WHERE table_schema='d' AND TABLE_NAME LIKE 'ddl%';
+TABLE_NAME	CREATE_TIME
+ddl_b1	2037-12-31 23:00:00
+ddl_c1	2038-01-19 03:14:07
+-- SHOW DATABASES LIKE 'db_%';
+Database (db_%)
+db_b1
+db_c1

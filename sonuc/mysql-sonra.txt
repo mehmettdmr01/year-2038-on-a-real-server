@@ -1,0 +1,10 @@
+== INSERT varsayılan created_at ile
+== yalnız DATETIME sütunu kullanan tablo
+ERROR 3507 (HY000) at line 1: Failed to update tables dictionary object.
+== tablo
+id	body	created_at	created_dt
+1	before 2038	2026-11-10 06:39:15	2026-11-10 06:39:15
+2	after 2038	2038-01-19 03:14:16	2038-01-19 03:14:16
+== NOW / UNIX_TIMESTAMP
+NOW()	UNIX_TIMESTAMP()	@@time_zone	@@sql_mode
+2038-01-19 03:14:16	2147483656	SYSTEM	ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION

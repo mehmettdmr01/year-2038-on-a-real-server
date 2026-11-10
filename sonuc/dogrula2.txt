@@ -1,0 +1,45 @@
+== saat: 2038-01-19 03:20:00  (2038 sonrası)
+-- INSERT INTO d.notes (body) VALUES ('default, after 2038');
+-- INSERT INTO d.notes (body, created_at) VALUES ('explicit literal', '2038-01-19 03:20:01');
+ERROR 1292 (22007) at line 1: Incorrect datetime value: '2038-01-19 03:20:01' for column 'created_at' at row 1
+-- INSERT INTO d.notes (body, created_at) VALUES ('explicit NOW()', NOW());
+ERROR 1292 (22007) at line 1: Incorrect datetime value: '2038-01-19 03:20:00' for column 'created_at' at row 1
+-- UPDATE d.notes SET body = CONCAT(body, ' (updated)') WHERE id = 1;
+-- CREATE TABLE d.yeni2038 (id INT);
+ERROR 1050 (42S01) at line 1: Table 'yeni2038' already exists
+-- CREATE DATABASE yeni_db_2038;
+ERROR 1007 (HY000) at line 1: Can't create database 'yeni_db_2038'; database exists
+-- SELECT id, body, created_at, UNIX_TIMESTAMP(created_at) FROM d.notes ORDER BY id;
+id	body	created_at	UNIX_TIMESTAMP(created_at)
+1	before 2038 (updated)	2026-11-10 06:39:15	1794292755
+2	after 2038	2038-01-19 03:14:16	2147483656
+3	default after 2038, second time	2026-11-10 06:40:38	1794292838
+4	default, after 2038	2038-01-19 03:20:00	2147484000
+== saat: 2037-12-31 23:00:00  (2038 öncesi)
+-- CREATE TABLE d.yeni2037 (id INT);
+ERROR 1050 (42S01) at line 1: Table 'yeni2037' already exists
+-- INSERT INTO d.notes (body) VALUES ('default, 2037');
+== saat: 2038-01-19 03:30:00  (yeniden 2038 sonrası)
+-- CREATE TABLE d.yeni2038b (id INT);
+ERROR 1050 (42S01) at line 1: Table 'yeni2038b' already exists
+== mysql yeniden başlatma (2038 sonrası)
+active
+-- SELECT NOW(), (SELECT COUNT(*) FROM d.notes) AS satir;
+NOW()	satir
+2038-01-19 03:30:05	5
+-- SELECT TABLE_NAME, CREATE_TIME FROM information_schema.tables WHERE table_schema='d';
+TABLE_NAME	CREATE_TIME
+notes	2026-11-10 06:40:37
+yeni2037	2026-11-10 06:40:37
+yeni2038	2026-11-10 06:40:37
+yeni2038b	2026-11-10 06:40:38
+Jan 19 03:30:01 deney2038 systemd[1]: mysql.service: Deactivated successfully.
+Jan 19 03:30:01 deney2038 systemd[1]: Stopped mysql.service - MySQL Community Server.
+Jan 19 03:30:01 deney2038 systemd[1]: mysql.service: Consumed 2.583s CPU time, 377.8M memory peak, 0B memory swap peak.
+Jan 19 03:30:01 deney2038 systemd[1]: Starting mysql.service - MySQL Community Server...
+Jan 19 03:30:02 deney2038 systemd[1]: Started mysql.service - MySQL Community Server.
+2038-01-19T03:30:02.627359Z 0 [Warning] [MY-013414] [Server] Server SSL certificate doesn't verify: certificate has expired
+2038-01-19T03:30:02.627904Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+2038-01-19T03:30:02.627944Z 0 [System] [MY-013602] [Server] Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel.
+2038-01-19T03:30:02.670564Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Bind-address: '127.0.0.1' port: 33060, socket: /var/run/mysqld/mysqlx.sock
+2038-01-19T03:30:02.670907Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.46-0ubuntu0.24.04.4'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  (Ubuntu).

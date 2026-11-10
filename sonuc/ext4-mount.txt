@@ -1,0 +1,5 @@
+[  307.642463] loop0: detected capacity change from 0 to 131072
+[  307.649828] EXT4-fs (loop0): mounted filesystem e04feee5-ee49-4929-ad49-eb90d8321a18 r/w with ordered data mode. Quota mode: none.
+[  307.649853] ext4 filesystem being mounted at /mnt/e128 supports timestamps until 2038-01-19 (0x7fffffff)
+[  307.668067] loop1: detected capacity change from 0 to 131072
+[  307.676770] EXT4-fs (loop1): mounted filesystem 8917e582-f782-47db-9bc5-844bae883990 r/w with ordered data mode. Quota mode: none.

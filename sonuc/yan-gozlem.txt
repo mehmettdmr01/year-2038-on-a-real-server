@@ -1,0 +1,24 @@
+== https
+curl: (60) SSL certificate problem: certificate has expired
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
+== systemctl --failed
+● droplet-agent-update.service loaded failed failed DigitalOcean Droplet Agent update check
+== journal hataları
+Jan 19 03:13:58 deney2038 systemd[1]: Failed to start droplet-agent-update.service - DigitalOcean Droplet Agent update check.
+== dmesg
+[  307.642463] loop0: detected capacity change from 0 to 131072
+[  307.649828] EXT4-fs (loop0): mounted filesystem e04feee5-ee49-4929-ad49-eb90d8321a18 r/w with ordered data mode. Quota mode: none.
+[  307.649853] ext4 filesystem being mounted at /mnt/e128 supports timestamps until 2038-01-19 (0x7fffffff)
+[  307.668067] loop1: detected capacity change from 0 to 131072
+[  307.676770] EXT4-fs (loop1): mounted filesystem 8917e582-f782-47db-9bc5-844bae883990 r/w with ordered data mode. Quota mode: none.
+[  327.814415] EXT4-fs (loop0): unmounting filesystem e04feee5-ee49-4929-ad49-eb90d8321a18.
+[  327.821764] EXT4-fs (loop1): unmounting filesystem 8917e582-f782-47db-9bc5-844bae883990.
+[  327.832126] loop0: detected capacity change from 0 to 131072
+[  327.839169] EXT4-fs (loop0): mounted filesystem e04feee5-ee49-4929-ad49-eb90d8321a18 r/w with ordered data mode. Quota mode: none.
+[  327.839187] ext4 filesystem being mounted at /mnt/e128 supports timestamps until 2038-01-19 (0x7fffffff)
+[  327.852443] loop1: detected capacity change from 0 to 131072
+[  327.861220] EXT4-fs (loop1): mounted filesystem 8917e582-f782-47db-9bc5-844bae883990 r/w with ordered data mode. Quota mode: none.
